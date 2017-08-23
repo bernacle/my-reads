@@ -20,13 +20,20 @@ class BooksApp extends React.Component {
       this.setState({ books })
     })
   }
-  
+
 
   render() {
+    const { books } = this.state
+
+    let currentlyReadingBooks = books.filter((book) => book.shelf === "currentlyReading")
+    let wantToReadBooks = books.filter((book) => book.shelf === "wantToRead")
+    let readBooks = books.filter((book) => book.shelf === "read")
+
+
     return(
       <div className="app">
         <ListBooks
-          books={this.state.books}
+          books={books}
          />
       </div>
     )

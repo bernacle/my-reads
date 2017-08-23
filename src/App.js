@@ -1,5 +1,5 @@
 import React from 'react'
-import ListBooks from './ListBooks'
+import Shelf from './Shelf'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
@@ -32,9 +32,27 @@ class BooksApp extends React.Component {
 
     return(
       <div className="app">
-        <ListBooks
-          books={books}
-         />
+        <div className="list-books">
+            <div className="list-books-title">
+              <h1>MyReads</h1>
+            </div>
+            <div className="list-books-content">
+              <div>
+                <Shelf
+                    shelf="Currently Reading"
+                    books={currentlyReadingBooks}
+                />
+                <Shelf
+                    shelf="Want to Read"
+                    books={wantToReadBooks}
+                />
+                <Shelf
+                    shelf="Read"
+                    books={readBooks}
+                />
+              </div>
+            </div>
+        </div>
       </div>
     )
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 
 class ListBooks extends Component {
@@ -8,15 +9,25 @@ class ListBooks extends Component {
         books: PropTypes.array.isRequired
     }
 
+    state = {
+        shelfOption: ''
+    }
+
+    updateBook = (book, option) =>{
+        BooksAPI.update(book, option)
+    }
+
     render(){
         const { books } = this.props
-
+        
         return(
             <ol className="books-grid">
-                {this.props.books.map((book) => (
+                {books.map((book) => (
                     <li key={book.id}>
                         <Book 
                             book={book}
+                            onUpdateBook={this.updateBook}
+                            shelfOption={book.shelf}
                          />
                     </li>
                 ))}

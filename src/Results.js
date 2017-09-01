@@ -4,21 +4,22 @@ import ListBooks from './ListBooks'
 class Results extends Component {
 
 
-    // {this.state.books && 
-    //                 <ListBooks
-    //                     books={this.state.books}
-    //                 />
-    //             }
-    //             {!this.state.books && 
-    //                 <p>Loading</p>
-    //             }
-
     render(){
+
+        const { books, searchedBooks } = this.props
+        
+        searchedBooks.map((searchBook) => {
+            books.filter(book => {
+                if (searchBook.id === book.id ){
+                    searchBook.shelf = book.shelf
+                }
+            })
+        })
 
         return(
             <div className="search-books-results">
                 <ListBooks
-                    books={this.props.books}
+                    books={searchedBooks}
                 />
             </div>
         )

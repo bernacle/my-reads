@@ -12,23 +12,6 @@ class SearchBook extends Component {
         this.setState({query})
     }
 
-    // search = (query) => {
-    //         BooksAPI.search(query, 50).then((response) => {
-    //         if (!response.error) {
-    //             this.setState({
-    //                 books: response,
-    //                 query: query
-    //             })
-    //         } else {
-    //             this.setState({ query })
-    //         }
-    //       })
-    // }
-    
-    // handleUpdate = (event) => {
-    //     this.props.onUpdateBook(this.props.book, event.target.value)
-    // }
-
     render(){
         return(
             <div className="search-books-bar">

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import history from './history'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 
@@ -14,7 +15,9 @@ class ListBooks extends Component {
     }
 
     updateBook = (book, option) =>{
-        BooksAPI.update(book, option)
+        BooksAPI.update(book, option).then(() =>{
+            history.push('/')
+        })
     }
 
     render(){
@@ -27,7 +30,7 @@ class ListBooks extends Component {
                         <Book 
                             book={book}
                             onUpdateBook={this.updateBook}
-                            shelfOption={book.shelf}
+                            shelfOption={book.shelf ? book.shelf : 'none'}
                          />
                     </li>
                 ))}

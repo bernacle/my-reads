@@ -4,7 +4,7 @@ To install the dependencies needed to run the project, type:
 
 ### `npm install`
 
-To start the project, type:
+To run the project, type:
 
 ### `npm start`
 

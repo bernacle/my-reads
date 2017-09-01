@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import history from './history'
-import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 
 class ListBooks extends Component {
+
+    
+    handleUpdate = (book, option) => {
+        this.props.onUpdateBook(book, option)
+    }    
 
     static propTypes = {
         books: PropTypes.array.isRequired
@@ -14,11 +17,6 @@ class ListBooks extends Component {
         shelfOption: ''
     }
 
-    updateBook = (book, option) =>{
-        BooksAPI.update(book, option).then(() =>{
-            history.push('/')
-        })
-    }
 
     render(){
         const { books } = this.props
@@ -29,7 +27,7 @@ class ListBooks extends Component {
                     <li key={book.id}>
                         <Book 
                             book={book}
-                            onUpdateBook={this.updateBook}
+                            onUpdateBook={this.handleUpdate}
                             shelfOption={book.shelf ? book.shelf : 'none'}
                          />
                     </li>

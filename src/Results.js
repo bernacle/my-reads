@@ -3,6 +3,9 @@ import ListBooks from './ListBooks'
 
 class Results extends Component {
 
+    handleUpdate = (book, option) => {
+        this.props.onUpdateBook(book, option)
+    }  
 
     render(){
 
@@ -20,6 +23,7 @@ class Results extends Component {
             <div className="search-books-results">
                 <ListBooks
                     books={searchedBooks}
+                    onUpdateBook={this.handleUpdate}
                 />
             </div>
         )

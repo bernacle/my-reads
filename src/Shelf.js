@@ -3,6 +3,10 @@ import ListBooks from './ListBooks'
 
 class Shelf extends Component {
 
+    handleUpdate = (book, option) => {
+        this.props.onUpdateBook(book, option)
+    }  
+
     render(){
         const { shelf, books } = this.props
 
@@ -12,6 +16,7 @@ class Shelf extends Component {
                 <div className="bookshelf-books">
                     <ListBooks
                         books={books}
+                        onUpdateBook={this.handleUpdate}
                     />
                 </div>
             </div>

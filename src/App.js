@@ -8,7 +8,6 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    showSearchPage: true,
     books: [],
     searchedBooks: [],
     hasBooks: false
@@ -18,6 +17,14 @@ class BooksApp extends React.Component {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
     })
+  }
+
+  updateBook = (book, option) =>{
+      BooksAPI.update(book, option).then(() =>{
+          BooksAPI.getAll().then((books) => {
+          this.setState({ books })
+        })
+      })
   }
 
   handleSearch = (query) => {
@@ -36,10 +43,6 @@ class BooksApp extends React.Component {
   render() {
     const { books } = this.state
 
-    let currentlyReadingBooks = books.filter((book) => book.shelf === "currentlyReading")
-    let wantToReadBooks = books.filter((book) => book.shelf === "wantToRead")
-    let readBooks = books.filter((book) => book.shelf === "read")
-
 
     return(
       <div className="app">
@@ -52,15 +55,18 @@ class BooksApp extends React.Component {
                 <div>
                   <Shelf
                       shelf="Currently Reading"
-                      books={currentlyReadingBooks}
+                      books={books.filter((book) => book.shelf === "currentlyReading")}
+                      onUpdateBook={this.updateBook}
                   />
                   <Shelf
                       shelf="Want to Read"
-                      books={wantToReadBooks}
+                      books={books.filter((book) => book.shelf === "wantToRead")}
+                      onUpdateBook={this.updateBook}
                   />
                   <Shelf
                       shelf="Read"
-                      books={readBooks}
+                      books={books.filter((book) => book.shelf === "read")}
+                      onUpdateBook={this.updateBook}
                   />
                 </div>
               </div>
@@ -78,6 +84,7 @@ class BooksApp extends React.Component {
               <Results 
                 searchedBooks={this.state.searchedBooks}
                 books={this.state.books}
+                onUpdateBook={this.updateBook}
               />
             }
           </div>

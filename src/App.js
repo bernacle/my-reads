@@ -20,12 +20,17 @@ class BooksApp extends React.Component {
     })
   }
 
-  updateBook = (book, option) =>{
-      BooksAPI.update(book, option).then(() =>{
-          BooksAPI.getAll().then((books) => {
-          this.setState({ books })
-        })
-      })
+  updateBook = (selectedBook, option) =>{
+    this.state.books.filter((book) => {
+      if(book.id === selectedBook.id) {
+          book.shelf = option
+      } else {
+        this.setState(state => ({
+            books: state.books.concat([selectedBook])
+        }))
+      }
+      BooksAPI.update(selectedBook, option)
+    })
   }
 
   handleSearch = (query) => {

@@ -21,17 +21,15 @@ class BooksApp extends React.Component {
   }
 
   updateBook = (selectedBook, option) =>{
-    this.state.books.filter((book) => {
-      if(book.id === selectedBook.id) {
-          book.shelf = option
-      } else {
-        this.setState(state => ({
-            books: state.books.concat([selectedBook])
-        }))
-      }
-      BooksAPI.update(selectedBook, option)
+    // Atualiza a pratelheira do livro, e se o livro não estiver no array de livros(state.books), ele é adicionado ao array
+    BooksAPI.update(selectedBook, option).then(() => {
+      selectedBook.shelf = option
+      this.setState({
+        books: this.state.books.filter(book => book.id !== selectedBook.id).concat([selectedBook])
+      })
     })
   }
+
 
   handleSearch = (query) => {
     if (query.length > 0){

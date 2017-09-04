@@ -32,14 +32,18 @@ class BooksApp extends React.Component {
 
 
   handleSearch = (query) => {
+    let timeout
     if (query.length > 0){
-        BooksAPI.search(query, 5).then((books) => {
-          if (books.error){
-            return this.setState({searchedBooks: [] , hasBooks: false})
-          } else {
-            this.setState({searchedBooks: books, hasBooks: true})
-          }
-        })
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+          BooksAPI.search(query, 5).then((books) => {
+            if (books.error){
+              return this.setState({searchedBooks: [] , hasBooks: false})
+            } else {
+              this.setState({searchedBooks: books, hasBooks: true})
+            }
+          })
+        }, 1000)
     }
   }
 
